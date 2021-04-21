@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Interview">
+        <activity
+            android:name=".handler.Handler2Activity"
+            android:exported="true" />
+
         <service
             android:name=".service.MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
         <service android:name=".service.ForeService" />
 
         <activity

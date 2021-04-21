@@ -1,5 +1,6 @@
 package com.`as`.interview.handler
 
+import android.content.Intent
 import android.os.*
 import android.util.Log
 import android.view.View
@@ -95,5 +96,7 @@ class HandlerActivity : AppCompatActivity() {
         }
     }
 
-
+    fun handler2(view: View) {
+        startActivity(Intent(this,Handler2Activity::class.java))
+    }
 }
