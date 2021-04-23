@@ -70,6 +70,13 @@ class Handler2Activity : AppCompatActivity() {
 
         val handlerThread = HandlerThread("thread-child")
         handlerThread.start()
+        handlerThread.looper.queue.addIdleHandler (object :MessageQueue.IdleHandler{
+            override fun queueIdle(): Boolean {
+
+                return false
+            }
+        })
+
 //        handlerThread.looper.setMessageLogging(LogPrinter(Log.ERROR,"xxx"))
 
         handler5= Handler(handlerThread.looper,object :Handler.Callback{
