@@ -3,10 +3,10 @@ package com.`as`.interview.handler
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.util.LogPrinter
-import android.util.Printer
 import android.view.View
+import android.widget.TextView
 import com.`as`.interview.R
+import java.util.*
 
 class Handler2Activity : AppCompatActivity() {
     lateinit var handler1: Handler
@@ -15,6 +15,10 @@ class Handler2Activity : AppCompatActivity() {
     lateinit var handler4: Handler
     lateinit var handler5: Handler
     lateinit var handler6: Handler
+
+    lateinit var handler: Handler
+    lateinit var thread: Thread
+    lateinit var textView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_handler2)
@@ -70,7 +74,7 @@ class Handler2Activity : AppCompatActivity() {
 
         val handlerThread = HandlerThread("thread-child")
         handlerThread.start()
-        handlerThread.looper.queue.addIdleHandler (object :MessageQueue.IdleHandler{
+        handlerThread.looper.queue.addIdleHandler(object : MessageQueue.IdleHandler {
             override fun queueIdle(): Boolean {
 
                 return false
@@ -79,22 +83,22 @@ class Handler2Activity : AppCompatActivity() {
 
 //        handlerThread.looper.setMessageLogging(LogPrinter(Log.ERROR,"xxx"))
 
-        handler5= Handler(handlerThread.looper,object :Handler.Callback{
+        handler5 = Handler(handlerThread.looper, object : Handler.Callback {
             override fun handleMessage(msg: Message): Boolean {
-                Log.e("xxx","handler5.handleMessage in ${Thread.currentThread()}  : ${msg.what}")
+                Log.e("xxx", "handler5.handleMessage in ${Thread.currentThread()}  : ${msg.what}")
                 return false
             }
         })
 
         handler5.sendEmptyMessage(2)
 
-        Thread{
+        Thread {
             handler5.post {
                 Log.e("xxx", "handler5.post in ${Thread.currentThread()}")
             }
             handler5.sendEmptyMessage(4)
 
-            handler6=Handler(Looper.getMainLooper(),object :Handler.Callback{
+            handler6 = Handler(Looper.getMainLooper(), object : Handler.Callback {
                 override fun handleMessage(msg: Message): Boolean {
                     Log.e("xxx", "handler6.handleMessage in ${Thread.currentThread()} ${msg.what}")
                     return false
@@ -108,5 +112,56 @@ class Handler2Activity : AppCompatActivity() {
             }
         }.start()
 
+        textView = findViewById(R.id.tv)
+
+        handler = Handler { msg ->
+            textView.text = "${msg.what}"
+            return@Handler false
+        }
+//        handler = Handler(object : Handler.Callback {
+//            override fun handleMessage(msg: Message): Boolean {
+//                return false
+//            }
+//        })
+
+        handler = object : Handler() {
+            override fun handleMessage(msg: Message) {
+                super.handleMessage(msg)// TODO: 2021/4/24 super
+                textView.setText("${msg.what}")
+            }
+        }
+        thread = Thread {
+            loop@ for (x in 1..5) {
+                try {
+                    Thread.sleep(1000)
+                    handler.sendEmptyMessage(x)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+    }
+
+    fun sendEmptyMessage(view: View) {
+        thread.start()
+
+        val handlerr = MyHandler(object : MyHandler.MyCallBack {
+            override fun myHandleMessage(msg: String): Boolean {
+                return false
+            }
+        })
+        val handlerrr=MyHandler{msg->
+            Log.e("xxx", msg)
+            return@MyHandler false
+        }
+        val x = object : MyHandler.MyCallBack {
+            override fun myHandleMessage(msg: String): Boolean {
+                return false
+            }
+        }
+//        anonymous //匿名
+
+        handlerrr.sendMsg("123")
     }
 }
