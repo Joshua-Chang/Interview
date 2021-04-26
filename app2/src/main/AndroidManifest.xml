@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.as.interview">
+    package="com.as.app2">
 
     <application
         android:allowBackup="true"
@@ -9,27 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Interview">
-        <activity
-            android:name=".handler.Handler2Activity"
-            android:exported="true" />
 
-        <service
-            android:name=".service.MyIntentService"
-            android:exported="false" />
-        <service android:name=".service.ForeService" />
 
         <activity
-            android:name=".service.ServiceActivity"
-            android:exported="true" />
-
-        <service android:name=".service.BackService" />
-
-        <activity
-            android:name=".handler.HandlerActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,14 +20,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TargetActivity"
+            android:exported="true"
+            android:label="Target1">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="goods"
+                    android:path="/goodsDetail"
+                    android:port="8888"
+                    android:scheme="xl" />
+            </intent-filter>
+        </activity>
 
         <activity
-            android:name=".activity.TestActivity"
+            android:name=".TargetActivity2"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.as.interview.app_test" />
-                <category android:name="category1"/>
+<!--                <category android:name="category2"/>-->
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

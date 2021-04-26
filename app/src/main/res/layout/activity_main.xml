@@ -24,15 +24,24 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="140dp"
         tools:layout_editor_absoluteY="341dp" />
-
+    <Button
+        android:onClick="activity"
+        android:id="@+id/activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="02_activity"
+        app:layout_constraintTop_toBottomOf="@+id/handler"
+        tools:layout_editor_absoluteX="140"
+        tools:ignore="MissingConstraints" />
     <Button
         android:onClick="service"
         android:id="@+id/service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="02_service"
-        app:layout_constraintTop_toBottomOf="@+id/handler"
-        tools:layout_editor_absoluteX="158dp"
+        android:text="03_service"
+        app:layout_constraintTop_toBottomOf="@+id/activity"
+        tools:layout_editor_absoluteX="140dp"
         tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

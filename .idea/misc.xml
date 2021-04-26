@@ -8,6 +8,9 @@
         <entry key="app/src/main/res/layout/activity_handler2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13753799392097266" />
         <entry key="app/src/main/res/layout/activity_service.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.1" />
+        <entry key="app2/src/main/res/layout/activity_home.xml" value="0.1933876811594203" />
+        <entry key="app2/src/main/res/layout/activity_target.xml" value="0.1" />
       </map>
     </option>
   </component>
