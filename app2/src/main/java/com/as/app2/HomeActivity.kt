@@ -1,7 +1,9 @@
 package com.`as`.app2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -10,6 +12,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.e(TAG,"onCreate")
         setContentView(R.layout.activity_home)
+        findViewById<TextView>(R.id.home_tv).setOnClickListener {
+            startActivity(Intent(this,TargetActivity2::class.java))
+        }
     }
     override fun onRestart() {
         super.onRestart()

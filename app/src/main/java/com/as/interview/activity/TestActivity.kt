@@ -1,5 +1,6 @@
 package com.`as`.interview.activity
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -50,5 +51,10 @@ class TestActivity : AppCompatActivity() {
     override fun onDestroy() {
         Log.e(TAG,"onDestroy")
         super.onDestroy()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        Log.e(TAG,"onNewIntent")
+        super.onNewIntent(intent)
     }
 }

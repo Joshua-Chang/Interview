@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Interview">
         <activity
+            android:name=".activity.TaskActivity"
+            android:exported="true" />
+        <activity
             android:name=".handler.Handler2Activity"
             android:exported="true" />
 
@@ -37,15 +40,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.TestActivity"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.as.interview.app_test" />
-                <category android:name="category1"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="category1" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

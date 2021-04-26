@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.`as`.interview.activity.TaskActivity
 import com.`as`.interview.handler.HandlerActivity
 import com.`as`.interview.service.ServiceActivity
 
@@ -57,6 +58,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun activity(view: View) {
+        startActivity(Intent(this, TaskActivity::class.java))
+
         val packageName = "com.as.app2"
         val fullClassName = "com.as.app2.HomeActivity"
         /*显式Intent：设置ComponentName的Intent。setComponent()、setClass()、setClassName()，或 Intent 构造函数设置组件名称*/
@@ -79,13 +82,13 @@ class MainActivity : AppCompatActivity() {
 //
 
 
-        val intent= Intent("com.as.interview.app_test")
+//        val intent= Intent("com.as.interview.app_test")
 //            .apply {
 //            `package`=packageName
 //        }
-        if (intent.resolveActivity(packageManager) != null) {/*验证至少有一个能接收该intent的activity*/
-            startActivity(intent)
-        }
+//        if (intent.resolveActivity(packageManager) != null) {/*验证至少有一个能接收该intent的activity*/
+//            startActivity(intent)
+//        }
 
 //        val queryIntentActivities =
 //            packageManager.queryIntentActivities(Intent(Intent.ACTION_MAIN), MATCH_ALL)
