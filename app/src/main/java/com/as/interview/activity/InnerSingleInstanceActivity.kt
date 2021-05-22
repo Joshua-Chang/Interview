@@ -1,20 +1,21 @@
 package com.`as`.interview.activity
 
+import android.app.ActivityManager
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.`as`.interview.R
 
-class TestActivity : AppCompatActivity() {
-    val TAG ="TestActivity"
+class InnerSingleInstanceActivity : AppCompatActivity() {
+    val TAG ="InnerSingleInstanceActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e(TAG,"onCreate")
-        setContentView(R.layout.activity_handler)
-        if (intent != null) {
+        setContentView(R.layout.activity_test)
+        if (intent != null&&intent.data!=null) {
             val uri: Uri = intent.data!!
             val url = uri.toString()
             Log.e("xxx", url)
@@ -34,8 +35,15 @@ class TestActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        Log.e(TAG,"onResume")
+        Log.e(TAG, "onResume")
         super.onResume()
+        val ams = getSystemService(ActivityManager::class.java)
+        for (task in ams.appTasks) {
+            Log.e(
+                TAG,
+                "${task.taskInfo.numActivities}:[${task.taskInfo.baseActivity?.className}->${task.taskInfo.topActivity?.className}]"
+            )
+        }
     }
 
     override fun onPause() {
@@ -57,4 +65,5 @@ class TestActivity : AppCompatActivity() {
         Log.e(TAG,"onNewIntent")
         super.onNewIntent(intent)
     }
+
 }

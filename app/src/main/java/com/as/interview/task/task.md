@@ -11,10 +11,26 @@
 2. singleTop：和standard一样，只有会复用Task顶的Activity并`onNewIntent`，而不必创建新的实例。
    从A app中打开B app里的Activity时，只有当A Task顶的Activity的刚好是准备要打开的activity时，才不在栈顶创建该Activity，而是复用之前打开的并`onNewIntent`
 
+> 假设主界面为 MainActivity，显示新闻的界面是 DetailActivity，显然显示任何一条新闻都会使用 DetailActivity，即把新闻内容通过 Intent 传给 DetailActivity 就可以了。 假设你正在看新闻1(即在 DetailActivity)，此时手机收到服务器的推送：收到一条通知(新闻2)，点击通知就会跳转到 DetailActivity 并显示新闻2，当你点击通知时，因为目前栈顶的 Activity 就是 DetailActivity，因此这里就是使用 SingleTop 的地方，即点击通知后以 SingleTop 加载模式打开 DetailActivity 并显示新闻2，因此新闻1的 DetailActivity 就被覆盖掉了。 此后你点击返回键会回到主界面。
+>
+> OnNewIntent
+>
+> 针对网易新闻这个案例来看，DetailActivity一般是一个webView,然后 根据上一个页面（新闻列表）传过来的url展示对应的网页，“通知“也是一样的。都是通过intent把url传到DetailActivity。以下一段代码简单的模拟DetailActivity 接收数据的过程。
 
-   standard、singleTop都是直接在原Task上新建或复用，而singleTask、singleInstance可以跨Task打开Activity。
+
+   standard、singleTop都是直接在原Task上新建或复用，而singleTask、singleInstance是跨Task打开Activity(过渡时原生有应用间切换动画)。
 
 3. singleTask：Activity被其他的Task启动的时候：不会直接放到启动他的Task栈顶，而是在自己的Task的栈顶；同时把自己的Task叠加到启动它的Task上(不同task过渡时原生有应用间切换动画)。连按返回键时，退出完自己的task，再退(过渡动画)启动它的task。
+
+   第一步：**将被启动Activity放到被启动Task顶部**：没有原Task(外部app未启动)则新开一个；有task但其内没有要启动的Activity(要启动的外部Activity所在的app已启动，但该Activity不在栈内，即没被启动过)则将被启动的Activity放到所在Task栈顶；有task且task内有要启动的Activity时推到栈顶，上边的被推出。
+
+   | 没有将被启动的Task(所在app未启动)  | 有将被启动的Task                                  |            |
+   | ---------------------------------- | ------------------------------------------------- | ---------- |
+   | 被启动的activity放入新的task？     | 将被启动的Activity不在task内(activity未被启动)    | 在task     |
+   | 被启动的activity再启动其他Activity | 将被启动的Activity放到Task栈顶 (其他Activity在下) | 把顶部推出 |
+   | 要看被启动者具体的启动模式         |                                                   |            |
+
+   第二步：将被启动的task移动到当前task顶。
 
    被启动的Activity原本的Task里，把Activity推到栈顶并`onNewIntent`刷新数据，**Activity原来上边的会被推出**。原来还没有task，新开一个Task。
    特殊情况：Activity被其他的Task启动后，Activity原task叠加在启动它的task上，此时按下home/recentTask从前台切后台，两个task不再叠加，都出现在recentTask里，在Activity原本的Task栈顶回退不会退到启动他的Task。
@@ -41,6 +57,12 @@
 
    所以在打开一个配置了singleTask的Activity时。若是外部app的，TaskAffinity不同，发送task切换；若是app自己的，TaskAffinity相同，则进入栈顶，前面被推出。若给这个Activity设置一个独立的TaskAffinity，哪怕是在同一个app内也会被拆到另一个task里，若这个独立的TaskAffinity恰好与其他app的一样，这个Activity甚至会被放到别人的app的task里。
 
-
-
 `adb shell dumpsys activity`可查看task与activity关系。`getRunningTasks`等方法早被屏蔽
+
+```kotlin
+val ams = getSystemService(ActivityManager::class.java)
+for (task in ams.appTasks) {
+    Log.e(TAG, "${task.taskInfo.numActivities}:[${task.taskInfo.baseActivity?.className}->${task.taskInfo.topActivity?.className}]")
+}
+```
+

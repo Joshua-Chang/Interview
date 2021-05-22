@@ -33,7 +33,7 @@ Intent就是以当前组件为起点（携带数据），经过**层层筛选到
 | ----------------- | -------------------------------------------- | ------------------------ |
 | **ComponentName** | `setComponent`、`setClass(Name)`、构造       | 显式                     |
 | **action**        | `setAction`、构造                            | `<action/>`              |
-| **data/type**     | 各自`setData(Uri)\Type` 同时`setDataAndType` | `<action uri mineType/>` |
+| **data/type**     | 各自`setData(Uri)\Type` 同时`setDataAndType` | `<action uri mimeType/>` |
 | **category**      | `addCategory`                                | `<action category/>`     |
 | **extra**         | `putExtra(包.k,v)`、`putExtras(Bundle)`      |                          |
 | **Flag**          | `setFlags`                                   |                          |

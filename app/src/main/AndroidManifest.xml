@@ -41,8 +41,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TestActivity"
+            android:name=".activity.InnerSingleTaskActivity"
             android:enabled="true"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.as.interview.app_test" />
@@ -51,6 +52,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.InnerSingleInstanceActivity" android:enabled="true" android:exported="true" android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

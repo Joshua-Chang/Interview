@@ -8,8 +8,34 @@
     tools:context=".activity.TaskActivity">
 
     <TextView
-        android:id="@+id/tv_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Task" />
+        android:id="@+id/tv_standard"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="standard/singTop" />
+    <TextView
+        android:id="@+id/tv_single_task"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="singleTask" />
+    <TextView
+        android:id="@+id/tv_single_instance"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="singleInstance" />
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/tv_inner_single_task"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="innerSingleTask" />
+    <TextView
+        android:id="@+id/tv_inner_single_instance"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="innerSingleInstance" />
 </LinearLayout>

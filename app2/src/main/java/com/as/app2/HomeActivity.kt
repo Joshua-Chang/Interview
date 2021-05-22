@@ -13,7 +13,7 @@ class HomeActivity : AppCompatActivity() {
         Log.e(TAG,"onCreate")
         setContentView(R.layout.activity_home)
         findViewById<TextView>(R.id.home_tv).setOnClickListener {
-            startActivity(Intent(this,TargetActivity2::class.java))
+            startActivity(Intent(this,SingleInstanceActivity::class.java))
         }
     }
     override fun onRestart() {
