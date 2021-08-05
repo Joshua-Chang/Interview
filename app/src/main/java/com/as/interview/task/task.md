@@ -26,11 +26,11 @@
 
    | 没有将被启动的Task(所在app未启动)  | 有将被启动的Task                                  |            |
    | ---------------------------------- | ------------------------------------------------- | ---------- |
-   | 被启动的activity放入新的task？     | 将被启动的Activity不在task内(activity未被启动)    | 在task     |
+   | 被启动的activity放入新的task？     | 将被启动的Activity不在task内(activity未被启动)    | 在task内   |
    | 被启动的activity再启动其他Activity | 将被启动的Activity放到Task栈顶 (其他Activity在下) | 把顶部推出 |
    | 要看被启动者具体的启动模式         |                                                   |            |
 
-   第二步：将被启动的task移动到当前task顶。
+   第二步：**将被启动的task移动到当前task顶**。
 
    被启动的Activity原本的Task里，把Activity推到栈顶并`onNewIntent`刷新数据，**Activity原来上边的会被推出**。原来还没有task，新开一个Task。
    特殊情况：Activity被其他的Task启动后，Activity原task叠加在启动它的task上，此时按下home/recentTask从前台切后台，两个task不再叠加，都出现在recentTask里，在Activity原本的Task栈顶回退不会退到启动他的Task。

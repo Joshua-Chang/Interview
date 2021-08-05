@@ -71,21 +71,19 @@ class Handler2Activity : AppCompatActivity() {
 
             handler4.sendEmptyMessage(2)/*收不到，因为loop会一直循环，代码无法向下走*/
         }.start()
-
+        //主线程向子线程发消息,在线程run的一开始，设置一个自己线程的Looper,其他线程用该looper往本线程发消息
         val handlerThread = HandlerThread("thread-child")
         handlerThread.start()
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)
+        //也可处理idleHandler
         handlerThread.looper.queue.addIdleHandler(object : MessageQueue.IdleHandler {
             override fun queueIdle(): Boolean {
-
                 return false
             }
         })
-
-//        handlerThread.looper.setMessageLogging(LogPrinter(Log.ERROR,"xxx"))
-
         handler5 = Handler(handlerThread.looper, object : Handler.Callback {
             override fun handleMessage(msg: Message): Boolean {
-                Log.e("xxx", "handler5.handleMessage in ${Thread.currentThread()}  : ${msg.what}")
+                Log.e("xxx", "${Thread.currentThread()}  : ${msg.what}")
                 return false
             }
         })

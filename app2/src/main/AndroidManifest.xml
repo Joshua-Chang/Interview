@@ -54,7 +54,6 @@
         <activity
             android:name=".SingleTaskActivity"
             android:exported="true"
-            android:allowTaskReparenting="true"
             android:launchMode="singleTask" >
 
         </activity>

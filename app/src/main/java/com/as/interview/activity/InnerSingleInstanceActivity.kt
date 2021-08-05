@@ -5,9 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.`as`.interview.R
+import com.`as`.interview.handler.HandlerActivity
 
 class InnerSingleInstanceActivity : AppCompatActivity() {
     val TAG ="InnerSingleInstanceActivity"
@@ -21,6 +23,10 @@ class InnerSingleInstanceActivity : AppCompatActivity() {
             Log.e("xxx", url)
             Log.e("xxx", "\n ${uri.authority}\t${uri.scheme}\t${uri.host}\t${uri.port}\t${uri.path}\t${uri.query}\t${uri.getQueryParameter("goodsId")}\t${uri.scheme}")
             findViewById<TextView>(R.id.tv).text = "url=$uri\n finalPath=${uri.scheme}://${uri.host}:${uri.port}/${uri.path}?${uri.query}"
+        }
+
+        findViewById<Button>(R.id.button).setOnClickListener {
+            startActivity(Intent(this,HandlerActivity::class.java))
         }
     }
 

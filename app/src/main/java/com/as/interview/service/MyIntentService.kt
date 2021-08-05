@@ -22,6 +22,10 @@ private const val EXTRA_PARAM2 = "com.`as`.interview.service.extra.PARAM2"
  * helper methods.
 
  */
+/**
+ * 内部用线程池,可执行完停止.但由于后台使用限制,已被废弃
+ * 可以用JobIntentService,WorkManager代替
+ */
 class MyIntentService : IntentService("MyIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {

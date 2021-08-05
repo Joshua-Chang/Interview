@@ -6,9 +6,11 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.`as`.interview.R
+import com.`as`.interview.handler.HandlerActivity
 
 class InnerSingleTaskActivity : AppCompatActivity() {
     val TAG = "InnerSingleTaskActivity"
@@ -28,6 +30,10 @@ class InnerSingleTaskActivity : AppCompatActivity() {
             )
             findViewById<TextView>(R.id.tv).text =
                 "url=$uri\n finalPath=${uri.scheme}://${uri.host}:${uri.port}/${uri.path}?${uri.query}"
+        }
+
+        findViewById<Button>(R.id.button).setOnClickListener {
+            startActivity(Intent(this, HandlerActivity::class.java))
         }
     }
 

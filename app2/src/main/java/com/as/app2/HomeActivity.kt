@@ -13,6 +13,9 @@ class HomeActivity : AppCompatActivity() {
         Log.e(TAG,"onCreate")
         setContentView(R.layout.activity_home)
         findViewById<TextView>(R.id.home_tv).setOnClickListener {
+            startActivity(Intent(this,SingleTaskActivity::class.java))
+        }
+        findViewById<TextView>(R.id.home_tv2).setOnClickListener {
             startActivity(Intent(this,SingleInstanceActivity::class.java))
         }
     }
