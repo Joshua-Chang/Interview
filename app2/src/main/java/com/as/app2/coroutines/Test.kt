@@ -2,6 +2,12 @@ package com.`as`.app2.coroutines
 
 import kotlinx.coroutines.*
 
+/**
+ * 官方文档 基础
+ * 在作用域中启动协程无需显式 join ，
+ * 因为外部协程（runBlocking|Coroutine/groupScope）直到在其作用域中启动的所有协程都执行完毕后才会结束
+ * 包括 runBlocking 在内的每个协程构建器都将 CoroutineScope 的实例添加到其代码块所在的作用域中
+ */
 fun main(args: Array<String>) {
 //runBlockingTest()
 //    launchTest()
